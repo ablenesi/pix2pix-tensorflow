@@ -9,11 +9,11 @@
 #  --input_dir cats/train_250 \
 #  --which_direction BtoA
 
-python pix2pix.py \
-  --mode test \
-  --output_dir cats_test/1000 \
-  --input_dir cats/test_1000 \
-  --checkpoint cats_train/1000
+# python pix2pix.py \
+#  --mode test \
+#  --output_dir cats_test/1000 \
+#  --input_dir cats/test_1000 \
+#  --checkpoint cats_train/1000
 
 from __future__ import absolute_import
 from __future__ import division
