@@ -73,7 +73,7 @@ def main():
     cmd = sys.argv[1:]
 
     # check if nvidia-docker or docker are on path
-    docker_path = which("nvidia-docker")
+    docker_path = which("nvidia-docke2r")
     if docker_path is None:
         docker_path = which("docker")
 
@@ -81,6 +81,7 @@ def main():
         raise Exception("docker not found")
 
     docker_args = [
+        "--runtime=nvidia",
         "--rm",
         "--volume",
         "/:/host",

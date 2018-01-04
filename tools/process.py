@@ -1,3 +1,20 @@
+# Resize - python3 tools/dockrun.py python tools/process.py --input_dir cats/src/train250 --output_dir cats/src/train_250_resized --operation resize
+# Generate edges - python3 tools/dockrun.py python tools/process.py --input_dir cats/src/train250 --output_dir cats/src/train_e_250 --operation edges
+# Combine - python3 tools/dockrun.py python tools/process.py --input_dir cats/src/train_250_resized --b_dir cats/src/train_e_250 --output_dir cats/train_250 --operation combine
+
+#python pix2pix.py \
+#  --mode train \
+#  --output_dir cats_train \
+#  --max_epochs 10 \
+#  --input_dir cats/train_250 \
+#  --which_direction BtoA
+
+python pix2pix.py \
+  --mode test \
+  --output_dir cats_test/1000 \
+  --input_dir cats/test_1000 \
+  --checkpoint cats_train/1000
+
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -171,7 +188,7 @@ imwrite(E, output_path);
             output_path="'%s'" % png_file.name,
             image_width=256,
             threshold=25.0/255.0,
-            small_edge=5,
+            small_edge=10,
         )
 
         args = ["octave"]
@@ -226,7 +243,7 @@ def complete():
         else:
             remaining = 0
 
-        print("%d/%d complete  %0.2f images/sec  %dm%ds elapsed  %dm%ds remaining" % (num_complete, total, rate, elapsed // 60, elapsed % 60, remaining // 60, remaining % 60))
+        print("%d/%d complete  %0.2f images/sec  %dm%ds elapsed  %dh%dm%ds remaining" % (num_complete, total, rate, elapsed // 60, elapsed % 60, (remaining // 60) // 60, (remaining // 60) % 60, remaining % 60))
 
         last_complete = now
 
